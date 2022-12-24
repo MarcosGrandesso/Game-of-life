@@ -2,8 +2,8 @@
   <div id="app">
     <div>
       <HelloWorld/>
-      <div v-for="item, index_row in matriz" :key="index_row" class="flex">
-        <div v-for="item, index_col in matriz[index_row]" :key="index_col">
+      <div v-for="linha,index_row in matriz" :key="index_row" class="flex">
+        <div v-for="item, index_col in linha" :key="index_col">
           <CelulaLife :row="index_row" :col="index_col" @update-life="updateCelula($event)" :state="item"/>
         </div>
       </div>
@@ -37,18 +37,18 @@ export default {
     }
   },
   created() {
-    this.init()
+    this.inicia()
   },
   methods: {
-    init(){
+    inicia(){
       this.matriz = this.geraNovaMatriz(this.matriz)
-      this.rodaGame(this.matriz)
+      this.exec(this.matriz)
     },
-    rodaGame(matriz){
+    exec(matriz){
       this.matriz = this.geraNovaMatriz(matriz)
       setTimeout(()=>{
-        this.rodaGame(this.matriz)
-      }, 700)
+        this.exec(this.matriz)
+      }, 300)
     },
     updateCelula(event){
       if (event[2] == 0){
@@ -58,13 +58,13 @@ export default {
       }
     },
     verificaVizinhos(matriz, x, y){
-      let possiveisVizinhos = [
+      let testVizinho = [
         {x: -1,y: -1}, {x: -1,y: 0}, {x: -1,y: 1}, 
         {x: 0,y: -1}, {x: 0,y: 1},
         {x: 1,y: -1}, {x: 1,y: 0}, {x: 1,y: 1}, 
       ]
       let vizinhos = []
-      possiveisVizinhos.forEach((i)=>{
+      testVizinho.forEach((i)=>{
         if ((i['x'] + x >= 0 && i['y'] + y >= 0) && (i['x'] + x < matriz.length && i['y'] + y < matriz[0].length)){
           vizinhos.push({x: i['x']+x, y: i['y']+y})
         }

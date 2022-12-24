@@ -26,14 +26,14 @@ export default{
 <style>
 .box{
   display: inline-block;
-  border: 1px solid gray;
+  border: 1px solid red;
   padding: 8px;
   color: white;
-  background-color: grey;
+  background-color: red;
   margin: 2px;
 }
 .alive{
-  color: green;
-  background-color: green;
+  color: blue;
+  background-color: blue;
 }
 </style>
